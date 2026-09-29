@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Leadership - InnoStorey Innovations Pvt Ltd</title>
+  <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    /* Leadership Page Styles */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    h1, h2 {
+      color: #d4af37;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .leader-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      margin-bottom: 3rem;
+    }
+
+    .leader-card {
+      background: #222;
+      border: 1px solid #444;
+      border-radius: 10px;
+      padding: 1rem;
+      width: 260px;
+      color: #fff;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(212,175,55,0.5);
+      transition: transform 0.3s ease;
+    }
+
+    .leader-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 20px rgba(212,175,55,0.7);
+    }
+
+    .leader-card img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 1rem;
+      border: 3px solid #d4af37;
+    }
+
+    .leader-card h3 {
+      margin: 0.5rem 0 0.25rem;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #d4af37;
+    }
+
+    .leader-card .title {
+      font-weight: 600;
+      color: #f0c86a;
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+    }
+
+    .leader-card p {
+      font-size: 0.9rem;
+      line-height: 1.3;
+    }
+
+    footer {
+      background: #111;
+      color: #ccc;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      padding: 2rem 1rem;
+    }
+
+    footer h3 {
+      color: #d4af37;
+      margin-bottom: 0.5rem;
+    }
+
+    footer a {
+      display: block;
+      color: #ccc;
+      text-decoration: none;
+      margin-bottom: 0.3rem;
+    }
+
+    footer a:hover {
+      color: #d4af37;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      width: 100%;
+      margin-top: 2rem;
+      border-top: 1px solid #333;
+      padding-top: 1rem;
+      font-size: 0.85rem;
+    }
+
+    .social-icons a {
+      margin-right: 0.5rem;
+      color: #ccc;
+      font-size: 1.2rem;
+    }
+
+    .social-icons a:hover {
+      color: #d4af37;
+    }
+
+    header {
+      background: #1A1A1D;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      color: #fff;
+    }
+
+    header .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #d4af37;
+    }
+
+    nav a {
+      margin: 0 1rem;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    nav a.active,
+    nav a:hover {
+      color: #d4af37;
+    }
+
+    .cta-button {
+      background: #d4af37;
+      color: #000;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .cta-button:hover {
+      background: #f0c86a;
+    }
+    .dynamic-team {
+  text-align: center;
+  margin: 3rem 0;
+}
+
+.dynamic-team h2 {
+  color: #d4af37;
+  margin-bottom: 1rem;
+}
+
+.team-link {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  background-color: #d4af37;
+  color: #000;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.team-link:hover {
+  background-color: #f0c86a;
+}
+
+.leader-box.vertical-align {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #222;
+  border: 1px solid #444;
+  border-radius: 16px;
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 800px;
+  text-align: center;
+  color: #fff;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
+
+.leader-box.vertical-align img {
+  width: 220px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 20px; /* curved square */
+  margin-bottom: 1.5rem;
+  border: 3px solid #d4af37;
+}
+
+.leader-box.vertical-align h3 {
+  color: #d4af37;
+  font-size: 1.6rem;
+  margin: 0.5rem 0 0.3rem;
+}
+
+.leader-box.vertical-align .title {
+  color: #f0c86a;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.leader-box.vertical-align p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0 auto;
+  max-width: 90%;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .leader-box.vertical-align img {
+    width: 180px;
+    height: 180px;
+  }
+
+  .leader-box.vertical-align {
+    padding: 1.5rem;
+  }
+}
+
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">InnoStorey</div>
+    <nav>
+      <a href="home.html">Home</a>
+      <a href="about.html">About Us</a>
+      <a href="services.html">Services</a>
+      <a href="center-of-excellence.html">Academics</a>
+      <a href="sales.html">Sales</a>
+      <a href="projects.html">Projects</a>
+      <a href="leadership.html" class="active">Leadership</a>
+    </nav>
+    <a href="contact.html" class="cta-button">Get Started</a>
+  </header>
+
+  <main class="container">
+
+    <!-- Leadership Intro -->
+    <section class="leadership-intro" style="padding: 3rem 0; text-align: center; color: #d4af37;">
+      <h1>Our Leadership Team</h1>
+      <p>Meet the visionaries and leaders driving innovation and growth at InnoStorey Innovations Pvt Ltd.</p>
+      <p>At InnoStorey Innovations Pvt Ltd, our team is our strength. Each member brings a unique blend of technical excellence, creative thinking, and problem-solving ability to every project we take on. We’re a multi-disciplinary powerhouse with expertise in:
+
+AI & Machine Learning Engineers ,
+
+Embedded Systems Developers,
+
+Biomedical Innovation Experts,
+
+IoT & Sensor Integration Specialists,
+
+UX/UI Designers & Visual Storytellers,
+
+Research Analysts & Field Experts,
+
+Together, we form a collaborative ecosystem where innovation meets execution, ensuring that our solutions are always ahead of the curve.</p>
+    </section>
+
+ <!-- Founders Section -->
+<section>
+  <h2>Our Prestigious Founder'S</h2>
+
+  <!-- Founder -->
+  <div class="leader-box vertical-align">
+    <img src="images/MOHAN.jpg" alt="G. Mohanraj - Founder & Chairman" />
+    <h3>Mr. G. Mohanraj</h3>
+    <p class="title">Founder & Chairman</p>
+    <p>
+      Mr. G. Mohanraj is the visionary force behind InnoStorey Innovations Pvt Ltd. With an unyielding passion for deep technology, innovation, and nation-building, he laid the foundation for InnoStorey to serve as a bridge between academic research, industrial application, and social impact.
+    </p>
+    <p>
+      Under his dynamic leadership, the company has grown into a multidisciplinary powerhouse focusing on Artificial Intelligence, Embedded Systems, Biomedical Engineering, and Smart City solutions. Mr. Mohanraj's unique ability to fuse scientific insight with strategic execution has enabled InnoStorey to consistently deliver forward-thinking solutions that address real-world challenges.
+    </p>
+    <p>
+      His leadership philosophy is grounded in excellence, ethical innovation, and long-term sustainability. He continues to inspire a new generation of technologists and entrepreneurs by fostering a culture of curiosity, purpose-driven development, and futuristic thinking.
+    </p>
+  </div>
+
+  <!-- Co-Founder -->
+  <div class="leader-box vertical-align">
+    <img src="images/krish.jpg" alt="G. Krishnaveni - Co-Founder & Executive Director" />
+    <h3>Ms. G. Krishnaveni</h3>
+    <p class="title">Co-Founder & Executive Director</p>
+    <p>
+      Ms. G. Krishnaveni serves as the Co-Founder and Executive Director of InnoStorey Innovations Pvt Ltd, bringing deep expertise in operations, academic engagement, and organizational development. Her dedication to precision, people management, and results-oriented execution plays a vital role in the company’s steady growth.
+    </p>
+    <p>
+      A strategic thinker and passionate mentor, she has been instrumental in building scalable processes, strengthening industry-academia collaborations, and expanding the company’s reach into new markets and verticals. Her calm leadership and ability to harmonize teams have created a resilient and agile operational backbone at InnoStorey.
+    </p>
+    <p>
+      Ms. Krishnaveni also champions inclusive innovation and talent development, ensuring that InnoStorey not only delivers technology but also uplifts communities through education, training, and employment initiatives.
+    </p>
+  </div>
+</section>
+
+
+
+
+
+    <!-- Other Leadership Section -->
+   <section class="dynamic-team">
+  <h2>Our Dynamic Team</h2>
+  <a href="innostorey.html" class="team-link">Meet Team InnoStorey</a>
+</section>
+
+  </main>
+
+  <!-- Footer -->
+ <footer>
+  <div>
+    <h3>Company</h3>
+    <a href="about.html">About Us</a>
+    <a href="services.html">Services</a>
+    <a href="center-of-excellence.html">Academics</a>
+    <a href="leadership.html">Leadership</a>
+  </div>
+  <div>
+    <h3>Resources</h3>
+    <a href="sales.html">Sales</a>
+    <a href="projects.html">Projects</a>
+    <a href="contact.html">Contact Us</a>
+  </div>
+  <div>
+    <h3>Support</h3>
+    <a href="faq.html">FAQ</a>
+    <a href="careers.html">Careers</a>
+  </div>
+  <div>
+    <h3>Contact Info</h3>
+    <p>Email: <a href="mailto:info@innostorey.com">info@innostorey.com</a></p>
+    <p>Phone:</p>
+    <p><a href="tel:+916383109121">+91 63831 09121</a></p>
+    <p><a href="tel:+919942861526">+91 99428 61526</a></p>
+    <p>Address: 1/183 Muthalamman Kovil Street, Valayankulam, Madurai-625022.</p>
+    <div class="social-icons" aria-label="Social media links">
+      <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+      <a href="https://www.linkedin.com/in/innostorey-innovations-127b83332" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="https://www.instagram.com/inno_storey_innovations?igsh=aGd4ano3ZWN2dnht" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 InnoStorey Innovations Pvt Ltd. All rights reserved. 
+    <a href="terms-and-privacy.html">Terms | Privacy</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

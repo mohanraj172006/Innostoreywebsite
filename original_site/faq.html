@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FAQ - InnoStorey Innovations Pvt Ltd</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="faq.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@700&display=swap" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header>
+  <div class="logo">InnoStorey</div>
+  <nav>
+    <a href="home.html">Home</a>
+    <a href="about.html">About Us</a>
+    <a href="services.html">Services</a>
+    <a href="center-of-excellence.html">Academics</a>
+    <a href="sales.html">Sales</a>
+    <a href="projects.html">Projects</a>
+    <a href="faq.html" class="active">FAQ</a>
+  </nav>
+  <a href="contact.html" class="cta-button">Contact</a>
+</header>
+
+<main class="faq-container">
+  <h1>Frequently Asked Questions</h1>
+  <p class="faq-subtitle">Got questions? We've got answers. Here's everything you need to know about InnoStorey.</p>
+
+  <div class="faq">
+    <div class="faq-item">
+      <button class="faq-question">What services does InnoStorey offer?</button>
+      <div class="faq-answer">
+        <p>We provide end-to-end solutions including AI software development, IoT integration, cloud computing, cybersecurity, and business intelligence analytics.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">How can I request a quote or consultation?</button>
+      <div class="faq-answer">
+        <p>Visit our <a href="contact.html">Contact Page</a> and fill out the form. Our team will get back to you within 24 hours.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">Do you offer training or certification programs?</button>
+      <div class="faq-answer">
+        <p>Yes, through our Center of Excellence, we offer certified programs in AI, Data Science, IoT, and more. Check out the <a href="center-of-excellence.html">Academics</a> page.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">Can InnoStorey handle enterprise-level deployments?</button>
+      <div class="faq-answer">
+        <p>Absolutely. We specialize in scalable enterprise-grade deployments across cloud, IoT, and AI ecosystems.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">Where is InnoStorey located?</button>
+      <div class="faq-answer">
+        <p>Our registered office is at 1/183 Muthalamman Kovil Street, Valayankulam, Madurai-625022, Tamil Nadu, India.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div>
+    <h3>Company</h3>
+    <a href="about.html">About Us</a>
+    <a href="services.html">Services</a>
+    <a href="center-of-excellence.html">Academics</a>
+    <a href="leadership.html">Leadership</a>
+  </div>
+  <div>
+    <h3>Resources</h3>
+    <a href="sales.html">Sales</a>
+    <a href="projects.html">Projects</a>
+    <a href="contact.html">Contact Us</a>
+  </div>
+  <div>
+    <h3>Support</h3>
+    <a href="faq.html">FAQ</a>
+    <a href="careers.html">Careers</a>
+  </div>
+  <div>
+    <h3>Contact Info</h3>
+    <p>Email: <a href="mailto:info@innostorey.com">info@innostorey.com</a></p>
+    <p>Phone: <a href="tel:+916383109121">+91 63831 09121</a></p>
+    <p><a href="tel:+919942861526">+91 99428 61526</a></p>
+    <p>Address: 1/183 Muthalamman Kovil Street, Valayankulam, Madurai-625022.</p>
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="www.linkedin.com/in/innostorey-innovations-127b83332"><i class="fab fa-linkedin-in"></i></a>
+      <a href="https://www.instagram.com/inno_storey_innovations"><i class="fab fa-instagram"></i></a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 InnoStorey Innovations Pvt Ltd. All rights reserved. <a href="terms-and-privacy.html">Terms | Privacy</a></p>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+      item.classList.toggle('open');
+    });
+  });
+</script>
+
+</body>
+</html>
