@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Mail, Phone, MapPin, ArrowUpRight, ShieldCheck, Zap } from "lucide-react";
+import Image from "next/image";
+import { Mail, Phone, MapPin, ArrowUpRight, ShieldCheck } from "lucide-react";
 import { LinkedinIcon, InstagramIcon, YoutubeIcon, FacebookIcon } from "@/components/SocialIcons";
 
 const socialLinks = [
@@ -38,15 +39,21 @@ export default function Footer() {
 
           {/* ── Brand ── */}
           <div className="lg:col-span-2 space-y-5">
-            <Link href="/" className="inline-flex items-center gap-3 group">
-              <div className="w-9 h-9 flex items-center justify-center rounded-lg bg-[#111] border border-[rgba(255,215,0,0.4)] group-hover:border-[#FFD700] group-hover:shadow-[0_0_14px_rgba(255,215,0,0.3)] transition-all duration-300">
-                <Zap className="w-4.5 h-4.5 text-[#FFD700]" fill="#FFD700" />
+            <Link href="/" className="inline-flex items-center gap-3.5 group">
+              <div className="relative w-11 h-11 flex-shrink-0">
+                <Image
+                  src="/images/IS PNG 1.png"
+                  alt="InnoStorey Innovations Logo"
+                  fill
+                  sizes="44px"
+                  className="object-contain drop-shadow-[0_0_12px_rgba(255,215,0,0.45)] transition-transform duration-300 group-hover:scale-105"
+                />
               </div>
               <div>
                 <span className="block font-serif text-lg tracking-[0.15em] uppercase text-white group-hover:text-[#FFD700] transition-colors duration-300">
                   INNO<span className="text-[#FFD700]">STOREY</span>
                 </span>
-                <span className="block text-[9px] tracking-[0.25em] text-[#444] uppercase">
+                <span className="block text-[9px] tracking-[0.25em] text-[#A8A8A8] uppercase">
                   INNOVATIONS PVT LTD
                 </span>
               </div>
@@ -122,17 +129,22 @@ export default function Footer() {
                   1/183 Muthalamman Kovil Street, Valayankulam, Madurai-625022.
                 </span>
               </div>
-              <div className="flex items-center gap-2.5">
-                <Mail className="w-3.5 h-3.5 text-[#FFD700] shrink-0" />
-                <a href="mailto:info@innostorey.com" className="gold-link">
-                  info@innostorey.com
-                </a>
+              <div className="flex items-start gap-2.5">
+                <Mail className="w-3.5 h-3.5 text-[#FFD700] shrink-0 mt-0.5" />
+                <div className="flex flex-col gap-0.5">
+                  <a href="mailto:info@innostorey.in" className="gold-link">
+                    info@innostorey.in
+                  </a>
+                  <a href="mailto:innostoreyinnovations@gmail.com" className="gold-link">
+                    innostoreyinnovations@gmail.com
+                  </a>
+                </div>
               </div>
               <div className="flex items-start gap-2.5">
                 <Phone className="w-3.5 h-3.5 text-[#FFD700] shrink-0 mt-0.5" />
                 <div className="flex flex-col gap-0.5">
                   <a href="tel:+916383109121" className="gold-link">+91 63831 09121</a>
-                  <a href="tel:+919942861526" className="gold-link">+91 99428 61526</a>
+                  <a href="tel:+919384338182" className="gold-link">+91 93843 38182</a>
                 </div>
               </div>
             </div>
@@ -141,7 +153,7 @@ export default function Footer() {
 
         {/* ── Bottom bar ── */}
         <div className="pt-8 border-t border-[rgba(255,215,0,0.08)] flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-[#444]">
-          <p>© 2025–2026 InnoStorey Innovations Pvt Ltd. All rights reserved.</p>
+          <p>© 2026–2027 InnoStorey Innovations Pvt Ltd. All rights reserved.</p>
           <div className="flex items-center gap-6">
             <Link href="/terms" className="hover:text-[#FFD700] transition-colors duration-200">
               Terms of Service

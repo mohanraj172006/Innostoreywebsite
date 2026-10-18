@@ -1,9 +1,13 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import SectionHeader from "@/components/SectionHeader";
 import TeamCard from "@/components/TeamCard";
-import { Sparkles, Shield, Compass, Lightbulb, Zap, Award, Target, HeartHandshake } from "lucide-react";
-import BackgroundPaths from "@/components/BackgroundPaths";
+import { Sparkles, Shield, Compass, Lightbulb, Award } from "lucide-react";
+import PageHeroBackground from "@/components/PageHeroBackground";
+import NeuralCircuitBackground from "@/components/NeuralCircuitBackground";
 
 const coreValues = [
   { letter: "I", title: "Integrity", desc: "Uncompromising ethics and complete transparency in every partner relationship." },
@@ -46,13 +50,13 @@ export default function AboutPage() {
       {/* Hero Header */}
       <section className="py-20 md:py-28 bg-gradient-to-b from-[#080808] to-[#050505] border-b border-[#FFD700]/15 relative overflow-hidden">
         {/* Animated Gold Background Paths */}
-        <BackgroundPaths className="absolute inset-0 pointer-events-none z-0" />
+        <PageHeroBackground variant="about" className="absolute inset-0 w-full h-full pointer-events-none z-0" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <span className="text-xs uppercase tracking-[0.25em] font-semibold text-[#FFD700] px-4 py-1.5 rounded-full bg-[#FFD700]/10 border border-[#FFD700]/30 mb-6 inline-block">
             CORPORATE OVERVIEW
           </span>
           <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl font-light text-[#F5F5F5] leading-tight mb-6">
-            Pioneering the Next Era of <br />
+            Pioneering the Next Era of <br className="hidden sm:inline" />
             <span className="gold-gradient-text italic font-normal">Technology & Innovation</span>
           </h1>
           <p className="text-base sm:text-lg text-[#999999] max-w-3xl mx-auto font-light leading-relaxed">
@@ -95,17 +99,53 @@ export default function AboutPage() {
               </div>
             </div>
 
-            <div className="lg:col-span-6 relative">
-              <div className="relative w-full h-[450px] md:h-[520px] rounded-2xl overflow-hidden border border-[#FFD700]/30 shadow-[0_0_50px_rgba(0,0,0,0.9)]">
-                <Image
-                  src="/images/MC-1.jpg"
-                  alt="InnoStorey Innovations Building Legacy"
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-70" />
+            {/* Image - InnoStorey Logo with Neural Circuit Background */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.65, ease: "easeOut" }}
+              className="lg:col-span-6 relative"
+            >
+              {/* Outer glow ring */}
+              <div className="absolute -inset-2 rounded-3xl bg-[radial-gradient(ellipse,rgba(255,215,0,0.18)_0%,transparent_70%)] blur-xl pointer-events-none z-0" />
+
+              <div className="relative w-full h-[450px] md:h-[520px] rounded-2xl overflow-hidden border border-[rgba(255,215,0,0.35)] shadow-[0_0_60px_rgba(255,215,0,0.15)] z-10">
+                {/* Animated Neural Circuit Background */}
+                <div className="absolute inset-0 bg-[#050505]">
+                  <NeuralCircuitBackground className="absolute inset-0 w-full h-full" />
+                </div>
+
+                {/* Corner bracket decorations */}
+                <div className="absolute top-3 left-3 w-6 h-6 border-t-2 border-l-2 border-[rgba(255,215,0,0.7)] z-20" />
+                <div className="absolute top-3 right-3 w-6 h-6 border-t-2 border-r-2 border-[rgba(255,215,0,0.7)] z-20" />
+                <div className="absolute bottom-3 left-3 w-6 h-6 border-b-2 border-l-2 border-[rgba(255,215,0,0.7)] z-20" />
+                <div className="absolute bottom-3 right-3 w-6 h-6 border-b-2 border-r-2 border-[rgba(255,215,0,0.7)] z-20" />
+
+                {/* Logo centered */}
+                <div className="absolute inset-0 flex items-center justify-center z-20 p-8">
+                  <div className="relative w-full max-w-[340px]">
+                    {/* Logo glow halo */}
+                    <div className="absolute inset-0 bg-[radial-gradient(ellipse,rgba(255,215,0,0.12)_0%,transparent_70%)] blur-2xl rounded-full scale-150" />
+                    <Image
+                      src="/images/IS PNG 1.png"
+                      alt="InnoStorey Innovations Pvt Ltd"
+                      width={340}
+                      height={300}
+                      className="relative z-10 w-full h-auto object-contain drop-shadow-[0_0_28px_rgba(255,215,0,0.5)]"
+                      style={{ width: "100%", height: "auto" }}
+                      priority
+                    />
+                  </div>
+                </div>
+
+                {/* Bottom gradient fade */}
+                <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#0A0A0A] to-transparent z-20" />
+
+                {/* Subtle gold vignette edges */}
+                <div className="absolute inset-0 shadow-[inset_0_0_40px_rgba(0,0,0,0.7)] z-20 pointer-events-none" />
               </div>
-            </div>
+            </motion.div>
 
           </div>
         </div>
@@ -120,25 +160,15 @@ export default function AboutPage() {
             description="Our leadership combines decades of industry insight, technical excellence, and dedication to academic innovation."
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <div className="max-w-md mx-auto">
             <TeamCard
               name="Mr. G. Mohanraj"
-              role="Founder & Managing Director"
-              image="/images/MOHAN.jpg"
+              role="Founder & Director"
+              image="/images/mohanraj_cropped.jpg"
               bio="Visionary tech leader driving strategic cloud transformation, IoT ecosystem design, and enterprise AI innovation across multi-national projects."
               isFounder={true}
-              linkedin="https://www.linkedin.com/in/innostorey-innovations-127b83332"
-              email="info@innostorey.com"
-            />
-
-            <TeamCard
-              name="Ms. G. Krishnaveni"
-              role="Co-Founder & Executive Director"
-              image="/images/KRISHNAVENI IMAGE.jpg"
-              bio="Leading academic innovation, strategic partnerships, Center of Excellence operations, and organizational talent development."
-              isFounder={true}
-              linkedin="https://www.linkedin.com/in/innostorey-innovations-127b83332"
-              email="info@innostorey.com"
+              linkedin="https://www.linkedin.com/in/mohan-raj-g-1b0ba6299"
+              email="mohanrajg172006@gmail.com"
             />
           </div>
         </div>
@@ -203,6 +233,73 @@ export default function AboutPage() {
                 </p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Vision 2035 Blueprint */}
+      <section className="py-24 md:py-32 bg-[#050505] border-t border-[rgba(255,215,0,0.12)] relative overflow-hidden">
+        {/* Ambient subtle glow background */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-[radial-gradient(ellipse,rgba(255,215,0,0.06)_0%,transparent_70%)] blur-3xl pointer-events-none z-0" />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <SectionHeader
+            label="ROADMAP & STRATEGY"
+            title="Vision 2035 Blueprint"
+            description="Our structured fifteen-year roadmap charting our research initiatives, patent developments, and global Centers of Excellence."
+          />
+
+          <div className="max-w-4xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              className="glass-neon-strong rounded-3xl p-8 sm:p-12 border border-[rgba(255,215,0,0.25)] relative overflow-hidden shadow-[0_0_50px_rgba(255,215,0,0.08)]"
+            >
+              {/* Top glowing line */}
+              <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#FFD700]/50 to-transparent" />
+
+              {/* Main Description */}
+              <p className="text-sm sm:text-base text-[#D0D0D0] leading-relaxed font-light mb-8">
+                Our strategic fifteen-year roadmap outlines concrete blueprints to lead research globally. By 2035, InnoStorey plans to have established thirty regional Centers of Excellence, filed over a hundred international hardware-software patents, and successfully powered digital frameworks for over a thousand enterprise corporations.
+              </p>
+
+              {/* Strategic Focus Elements */}
+              <div className="space-y-4 pt-2">
+                <h4 className="text-[11px] sm:text-xs uppercase tracking-[0.22em] font-bold text-[#FFD700]">
+                  STRATEGIC FOCUS ELEMENTS:
+                </h4>
+                <ul className="space-y-3.5">
+                  <li className="flex items-start gap-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#FFD700] shadow-[0_0_8px_rgba(255,215,0,0.8)] mt-2 shrink-0" />
+                    <span className="text-xs sm:text-sm text-[#CCCCCC] leading-relaxed font-light">
+                      Deploying deep AI automation clusters within the manufacturing and logistics channels.
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#FFD700] shadow-[0_0_8px_rgba(255,215,0,0.8)] mt-2 shrink-0" />
+                    <span className="text-xs sm:text-sm text-[#CCCCCC] leading-relaxed font-light">
+                      Filing 100+ global patents spanning edge-computing and smart cyber-cybernetics.
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#FFD700] shadow-[0_0_8px_rgba(255,215,0,0.8)] mt-2 shrink-0" />
+                    <span className="text-xs sm:text-sm text-[#CCCCCC] leading-relaxed font-light">
+                      Upskilling 100,000+ engineers in high-demand deep tech fields.
+                    </span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Footer bar */}
+              <div className="pt-8 mt-10 border-t border-[rgba(255,215,0,0.12)] flex items-center justify-between text-[10px] tracking-[0.25em] uppercase">
+                <span className="text-[#777] font-semibold">INNOSTOREY GROUP</span>
+                <span className="text-[#FFD700] font-bold flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5" /> TRUSTED BLUEPRINT
+                </span>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>

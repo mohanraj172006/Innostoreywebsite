@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { memo, useMemo, useState, useEffect } from "react";
+import { memo, useMemo, useState, useEffect, useRef } from "react";
 
 interface Point {
   x: number;
@@ -21,18 +21,17 @@ const r = (n: number) => Math.round(n * 10) / 10;
 function generateAestheticPath(
   index: number,
   position: number,
-  type: "primary" | "secondary" | "accent"
+  type: "primary" | "secondary"
 ): string {
-  const baseAmplitude =
-    type === "primary" ? 150 : type === "secondary" ? 100 : 60;
-  const phase = index * 0.2;
+  const baseAmplitude = type === "primary" ? 140 : 90;
+  const phase = index * 0.25;
   const points: Point[] = [];
-  const segments = type === "primary" ? 10 : type === "secondary" ? 8 : 6;
+  const segments = type === "primary" ? 8 : 6;
 
   const startX = 2400;
   const startY = 800;
   const endX = -2400;
-  const endY = -800 + index * 25;
+  const endY = -800 + index * 30;
 
   for (let i = 0; i <= segments; i++) {
     const progress = i / segments;
@@ -48,13 +47,10 @@ function generateAestheticPath(
     const wave2 =
       Math.cos(progress * Math.PI * 4 + phase) *
       (baseAmplitude * 0.3 * amplitudeFactor);
-    const wave3 =
-      Math.sin(progress * Math.PI * 2 + phase) *
-      (baseAmplitude * 0.2 * amplitudeFactor);
 
     points.push({
       x: r(baseX * position),
-      y: r(baseY + wave1 + wave2 + wave3),
+      y: r(baseY + wave1 + wave2),
     });
   }
 
@@ -75,9 +71,11 @@ function generateAestheticPath(
 export const FloatingPaths = memo(function FloatingPaths({
   position,
   gradientId = "neonGoldPathsGradient",
+  isVisible = true,
 }: {
   position: number;
   gradientId?: string;
+  isVisible?: boolean;
 }) {
   const [mounted, setMounted] = useState(false);
 
@@ -85,50 +83,35 @@ export const FloatingPaths = memo(function FloatingPaths({
     setMounted(true);
   }, []);
 
+  // Reduced from 12 primary + 15 secondary + 10 accent = 37 paths
+  // to 10 primary + 6 secondary = 16 paths per instance
   const primaryPaths: PathData[] = useMemo(() => {
     if (!mounted) return [];
-    return Array.from({ length: 12 }, (_, i) => ({
+    return Array.from({ length: 10 }, (_, i) => ({
       id: `primary-${position}-${i}`,
       d: generateAestheticPath(i, position, "primary"),
-      opacity: 0.18 + i * 0.025,
-      width: 3.5 + i * 0.35,
+      opacity: 0.15 + i * 0.025,
+      width: 3 + i * 0.3,
     }));
   }, [position, mounted]);
 
   const secondaryPaths: PathData[] = useMemo(() => {
     if (!mounted) return [];
-    return Array.from({ length: 15 }, (_, i) => ({
+    return Array.from({ length: 6 }, (_, i) => ({
       id: `secondary-${position}-${i}`,
       d: generateAestheticPath(i, position, "secondary"),
-      opacity: 0.14 + i * 0.02,
-      width: 2.5 + i * 0.25,
+      opacity: 0.10 + i * 0.02,
+      width: 2 + i * 0.2,
     }));
   }, [position, mounted]);
 
-  const accentPaths: PathData[] = useMemo(() => {
-    if (!mounted) return [];
-    return Array.from({ length: 10 }, (_, i) => ({
-      id: `accent-${position}-${i}`,
-      d: generateAestheticPath(i, position, "accent"),
-      opacity: 0.1 + i * 0.04,
-      width: 1.8 + i * 0.2,
-    }));
-  }, [position, mounted]);
-
-  // Avoid SSR hydration mismatch by only rendering paths once mounted on client
   if (!mounted) {
     return <div className="pointer-events-none absolute inset-0 overflow-hidden" />;
   }
 
-  const sharedAnimationProps = {
-    opacity: 1,
-    scale: 1,
-  };
-
-  const sharedTransition = {
-    opacity: { duration: 1 },
-    scale: { duration: 1 },
-  };
+  if (!isVisible) {
+    return <div className="pointer-events-none absolute inset-0 overflow-hidden" />;
+  }
 
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -137,8 +120,8 @@ export const FloatingPaths = memo(function FloatingPaths({
         fill="none"
         preserveAspectRatio="xMidYMid slice"
         viewBox="-2400 -800 4800 1600"
+        aria-hidden="true"
       >
-        <title>Neon Gold Background Paths</title>
         <defs>
           <linearGradient id={gradientId} x1="0%" x2="100%" y1="0%" y2="0%">
             <stop offset="0%" stopColor="#FFD700" stopOpacity="0.8" />
@@ -149,7 +132,8 @@ export const FloatingPaths = memo(function FloatingPaths({
           </linearGradient>
         </defs>
 
-        <g className="primary-waves">
+        {/* Primary paths with gentle y animation */}
+        <g>
           {primaryPaths.map((path) => (
             <motion.path
               key={path.id}
@@ -158,15 +142,12 @@ export const FloatingPaths = memo(function FloatingPaths({
               strokeLinecap="round"
               strokeWidth={path.width}
               style={{ opacity: path.opacity }}
-              initial={{ opacity: 0, scale: 0.85 }}
-              animate={{
-                ...sharedAnimationProps,
-                y: [0, -18, 0],
-              }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: path.opacity, y: [0, -14, 0] }}
               transition={{
-                ...sharedTransition,
+                opacity: { duration: 0.8 },
                 y: {
-                  duration: 8,
+                  duration: 10,
                   repeat: Number.POSITIVE_INFINITY,
                   ease: "easeInOut",
                   repeatType: "reverse",
@@ -176,7 +157,8 @@ export const FloatingPaths = memo(function FloatingPaths({
           ))}
         </g>
 
-        <g className="secondary-waves" style={{ opacity: 0.85 }}>
+        {/* Secondary paths — static opacity, subtle y motion */}
+        <g style={{ opacity: 0.8 }}>
           {secondaryPaths.map((path) => (
             <motion.path
               key={path.id}
@@ -185,42 +167,12 @@ export const FloatingPaths = memo(function FloatingPaths({
               strokeLinecap="round"
               strokeWidth={path.width}
               style={{ opacity: path.opacity }}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{
-                ...sharedAnimationProps,
-                y: [0, -12, 0],
-              }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: path.opacity, y: [0, -8, 0] }}
               transition={{
-                ...sharedTransition,
+                opacity: { duration: 0.8 },
                 y: {
-                  duration: 6,
-                  repeat: Number.POSITIVE_INFINITY,
-                  ease: "easeInOut",
-                  repeatType: "reverse",
-                },
-              }}
-            />
-          ))}
-        </g>
-
-        <g className="accent-waves" style={{ opacity: 0.7 }}>
-          {accentPaths.map((path) => (
-            <motion.path
-              key={path.id}
-              d={path.d}
-              stroke={`url(#${gradientId})`}
-              strokeLinecap="round"
-              strokeWidth={path.width}
-              style={{ opacity: path.opacity }}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{
-                ...sharedAnimationProps,
-                y: [0, -7, 0],
-              }}
-              transition={{
-                ...sharedTransition,
-                y: {
-                  duration: 4.5,
+                  duration: 8,
                   repeat: Number.POSITIVE_INFINITY,
                   ease: "easeInOut",
                   repeatType: "reverse",
@@ -243,16 +195,32 @@ export default memo(function BackgroundPaths({
   children,
   className = "",
 }: BackgroundPathsProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  // Only animate when the section is visible in the viewport
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.01 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   const isAbsolute = className.includes("absolute");
   return (
     <div
+      ref={containerRef}
       className={`overflow-hidden ${isAbsolute ? "" : "relative w-full"} ${className}`}
     >
-      {/* Background Flowing Paths from both directions with smooth continuous animation */}
+      {/* Background Flowing Paths from both directions */}
       <div className="absolute inset-0 pointer-events-none z-0">
-        <FloatingPaths position={1} gradientId="neonGoldPathsGradient1" />
-        <FloatingPaths position={-1} gradientId="neonGoldPathsGradient2" />
-        {/* Subtle dark gradient fade out so foreground text is crystal clear */}
+        <FloatingPaths position={1} gradientId="neonGoldPathsGradient1" isVisible={isVisible} />
+        <FloatingPaths position={-1} gradientId="neonGoldPathsGradient2" isVisible={isVisible} />
+        {/* Dark gradient overlay for text legibility */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.1)_0%,rgba(0,0,0,0.75)_85%,#000000_100%)] pointer-events-none" />
       </div>
 

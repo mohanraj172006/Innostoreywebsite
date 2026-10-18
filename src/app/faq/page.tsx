@@ -1,8 +1,10 @@
+"use client";
+
 import SectionHeader from "@/components/SectionHeader";
 import AccordionItem from "@/components/Accordion";
 import Link from "next/link";
 import { HelpCircle, Mail } from "lucide-react";
-import BackgroundPaths from "@/components/BackgroundPaths";
+import PageHeroBackground from "@/components/PageHeroBackground";
 
 const faqItems = [
   {
@@ -12,7 +14,7 @@ const faqItems = [
   },
   {
     question: "How can I request a quote or project consultation?",
-    answer: "You can request a free project consultation by submitting the contact form on our website, emailing us directly at info@innostorey.com, or calling our engineering team at +91 63831 09121 or +91 99428 61526.",
+    answer: "You can request a free project consultation by submitting the contact form on our website, emailing us directly at info@innostorey.in or innostoreyinnovations@gmail.com, or calling our engineering team at +91 6383109121 or +91 9384338182.",
   },
   {
     question: "Do you offer official academic training and certifications?",
@@ -39,13 +41,13 @@ export default function FAQPage() {
       {/* Page Header */}
       <section className="py-20 md:py-28 bg-gradient-to-b from-[#080808] to-[#050505] border-b border-[#FFD700]/15 text-center relative overflow-hidden">
         {/* Animated Gold Background Paths */}
-        <BackgroundPaths className="absolute inset-0 pointer-events-none z-0" />
+        <PageHeroBackground variant="faq" className="absolute inset-0 w-full h-full pointer-events-none z-0" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <span className="text-xs uppercase tracking-[0.25em] font-semibold text-[#FFD700] px-4 py-1.5 rounded-full bg-[#FFD700]/10 border border-[#FFD700]/30 mb-6 inline-block">
             HELP CENTER
           </span>
           <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl font-light text-[#F5F5F5] leading-tight mb-6">
-            Frequently Asked <br />
+            Frequently Asked <br className="hidden sm:inline" />
             <span className="gold-gradient-text italic font-normal">Questions & Answers</span>
           </h1>
           <p className="text-base sm:text-lg text-[#999999] max-w-3xl mx-auto font-light leading-relaxed">
@@ -89,11 +91,11 @@ export default function FAQPage() {
               Get in Touch
             </Link>
             <a
-              href="mailto:info@innostorey.com"
+              href="mailto:info@innostorey.in"
               className="px-8 py-3.5 rounded-full bg-[#111111] text-[#FFD700] border border-[#FFD700]/30 font-semibold text-xs uppercase tracking-widest hover:bg-[#FFD700] hover:text-[#050505] transition-all duration-300 flex items-center gap-2"
             >
               <Mail className="w-4 h-4" />
-              <span>Email info@innostorey.com</span>
+              <span>Email info@innostorey.in</span>
             </a>
           </div>
         </div>

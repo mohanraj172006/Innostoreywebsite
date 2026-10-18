@@ -1,20 +1,37 @@
+"use client";
+
 import SectionHeader from "@/components/SectionHeader";
 import ProjectCard from "@/components/ProjectCard";
-import BackgroundPaths from "@/components/BackgroundPaths";
+import PageHeroBackground from "@/components/PageHeroBackground";
 
 const researchProjects = [
   {
-    title: "Advanced Detection Technologies for CSSR Operations",
-    description: "A specialized ground drone system equipped with thermal imaging, acoustic sensors, and CO2 detectors designed for Collapsed Structure Search and Rescue (CSSR) operations during natural disasters.",
-    image: "/images/cssr.jpg",
-    category: "RESEARCH & DEFENSE",
-    technologies: ["Thermal Imaging", "CO2 Sensing", "Ground Robotics", "RF Mesh"],
+    title: "AIVAR-STEM-IOT",
+    description: "An AI-driven Virtual and Augmented Reality platform for interactive STEM education using IoT sensors. Bridges abstract scientific concepts into experiential 3D simulations with real-time laboratory telemetry.",
+    image: "/images/aivar_stem_iot.jpg",
+    category: "AI & IMMERSIVE STEM RESEARCH",
+    technologies: ["AI / ML", "Virtual Reality (VR)", "Augmented Reality (AR)", "IoT Sensors", "Cloud Integration"],
     features: [
-      "Real-time trapped victim detection",
-      "Autonomous obstacle navigation in rubble",
-      "Wireless telemetry feed to rescue command center",
+      "Virtual Reality: Immersive 3D simulations for deeper conceptual understanding",
+      "Augmented Reality: Bringing abstract scientific concepts to life in the physical world",
+      "AI-Driven Learning: Intelligent assistance and personalized educational pathways",
+      "IoT Sensors: Real-time data collection and smart physical-digital experiments",
+      "Multi-Tech Integration: AI + VR/AR + IoT working together seamlessly",
     ],
-    outcomes: "Accelerated disaster response times and protected search-and-rescue personnel.",
+    outcomes: "Interactive, hands-on STEM education empowering the next generation of innovators.",
+  },
+  {
+    title: "NovaAutonoma",
+    description: "NovaAutonoma is an AI-driven network automation framework that detects anomalies, predicts network failures, and optimizes 5G/6G networks for secure, self-healing communication.",
+    image: "/images/nova_autonoma.jpg",
+    category: "5G/6G NETWORK AUTOMATION RESEARCH",
+    technologies: ["5G/6G Core", "AI/ML Telemetry", "Self-Healing Networks", "Predictive Analytics", "Zero-Touch Automation"],
+    features: [
+      "Real-time AI anomaly detection and deep traffic pattern inspection",
+      "Predictive network failure prevention before service disruptions occur",
+      "Autonomous self-healing routines and dynamic 5G/6G throughput optimization",
+    ],
+    outcomes: "Zero-touch self-healing network reliability, minimized downtime, and optimized 5G/6G throughput.",
   },
   {
     title: "AI-Powered Medical Imaging & Diagnostic Tool",
@@ -41,19 +58,6 @@ const researchProjects = [
       "Seamless integration with solar and wind inputs",
     ],
     outcomes: "Reduced power transmission losses by 18% and improved grid reliability.",
-  },
-  {
-    title: "Autonomous Safety Drone Using Li-Fi Technology",
-    description: "An innovative autonomous drone system leveraging Li-Fi (Light Fidelity) communication, QR code identification, and smart wearables integration to enhance women's safety in urban areas.",
-    image: "/images/lifi.jpg",
-    category: "PATENTED SAFETY RESEARCH",
-    technologies: ["Li-Fi Communication", "Autonomous Drones", "QR Code ID", "Smart Wearables"],
-    features: [
-      "Real-time threat detection and instant police dispatch",
-      "Autonomous aerial navigation to exact emergency GPS coordinates",
-      "Secure light-based communication resistant to radio jamming",
-    ],
-    outcomes: "Rapid emergency response to harassment incidents and heightened public safety reassurance.",
   },
 ];
 
@@ -143,17 +147,17 @@ export default function ProjectsPage() {
       {/* Page Header */}
       <section className="py-20 md:py-28 bg-gradient-to-b from-[#080808] to-[#050505] border-b border-[#FFD700]/15 text-center relative overflow-hidden">
         {/* Animated Gold Background Paths */}
-        <BackgroundPaths className="absolute inset-0 pointer-events-none z-0" />
+        <PageHeroBackground variant="projects" className="absolute inset-0 w-full h-full pointer-events-none z-0" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <span className="text-xs uppercase tracking-[0.25em] font-semibold text-[#FFD700] px-4 py-1.5 rounded-full bg-[#FFD700]/10 border border-[#FFD700]/30 mb-6 inline-block">
             INNOVATION PORTFOLIO
           </span>
           <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl font-light text-[#F5F5F5] leading-tight mb-6">
-            Pioneering Research & <br />
+            Pioneering Research & <br className="hidden sm:inline" />
             <span className="gold-gradient-text italic font-normal">Engineering Projects</span>
           </h1>
           <p className="text-base sm:text-lg text-[#999999] max-w-3xl mx-auto font-light leading-relaxed">
-            From patented Li-Fi safety drones and CSSR ground robotics to enterprise platforms and student hackathon kits.
+            From AI-driven immersive STEM platforms, 5G/6G network automation, and clinical diagnostics to enterprise systems and student innovations.
           </p>
         </div>
       </section>
@@ -164,7 +168,7 @@ export default function ProjectsPage() {
           <SectionHeader
             label="RESEARCH & DISCOVERY"
             title="Advanced Research Initiatives"
-            description="High-impact research projects pushing the boundaries of AI, Li-Fi optical communication, and disaster robotics."
+            description="High-impact research initiatives pushing the boundaries of AI-driven immersive STEM education, autonomous 5G/6G networks, clinical diagnostics, and clean energy grids."
             centered={false}
           />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

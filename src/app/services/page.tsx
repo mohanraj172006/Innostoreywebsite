@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import SectionHeader from "@/components/SectionHeader";
 import ServiceCard from "@/components/ServiceCard";
@@ -13,8 +15,10 @@ import {
   Presentation,
   CheckCircle,
   ArrowRight,
+  Terminal,
+  Bot,
 } from "lucide-react";
-import BackgroundPaths from "@/components/BackgroundPaths";
+import PageHeroBackground from "@/components/PageHeroBackground";
 
 export default function ServicesPage() {
   return (
@@ -23,13 +27,13 @@ export default function ServicesPage() {
       {/* Page Hero Header */}
       <section className="py-20 md:py-28 bg-gradient-to-b from-[#080808] to-[#050505] border-b border-[#FFD700]/15 text-center relative overflow-hidden">
         {/* Animated Gold Background Paths */}
-        <BackgroundPaths className="absolute inset-0 pointer-events-none z-0" />
+        <PageHeroBackground variant="services" className="absolute inset-0 w-full h-full pointer-events-none z-0" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <span className="text-xs uppercase tracking-[0.25em] font-semibold text-[#FFD700] px-4 py-1.5 rounded-full bg-[#FFD700]/10 border border-[#FFD700]/30 mb-6 inline-block">
             CAPABILITIES & EXPERTISE
           </span>
           <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl font-light text-[#F5F5F5] leading-tight mb-6">
-            Enterprise Solutions & <br />
+            Enterprise Solutions & <br className="hidden sm:inline" />
             <span className="gold-gradient-text italic font-normal">Technology Mentorship</span>
           </h1>
           <p className="text-base sm:text-lg text-[#999999] max-w-3xl mx-auto font-light leading-relaxed">
@@ -51,7 +55,7 @@ export default function ServicesPage() {
             <ServiceCard
               title="Web Development"
               description="Creating responsive, secure, and scalable websites tailored for exceptional user experience, high SEO rankings, and conversion."
-              image="/images/Web-development.jpg"
+              image="/images/services_web_development.jpg"
               icon={<Code2 className="w-6 h-6" />}
               category="WEB ENGINEERING"
             />
@@ -59,7 +63,7 @@ export default function ServicesPage() {
             <ServiceCard
               title="Cloud Services & Migration"
               description="Seamless AWS and Azure cloud migration, containerized infrastructure, automated DevOps pipelines, and continuous cloud optimization."
-              image="/images/cloud-computing7.jpg"
+              image="/images/services_cloud_migration.jpg"
               icon={<Cloud className="w-6 h-6" />}
               category="CLOUD & INFRASTRUCTURE"
             />
@@ -67,7 +71,7 @@ export default function ServicesPage() {
             <ServiceCard
               title="Cybersecurity & Defense"
               description="Protecting digital assets with multi-layered security strategies, penetration testing, compliance audits, and real-time threat intelligence."
-              image="/images/cyber.jpg"
+              image="/images/services_cybersecurity.jpg"
               icon={<ShieldCheck className="w-6 h-6" />}
               category="SECURITY & COMPLIANCE"
             />
@@ -75,7 +79,7 @@ export default function ServicesPage() {
             <ServiceCard
               title="App Development"
               description="Intuitive mobile applications for iOS and Android with sleek interfaces, offline support, and high-speed API backends."
-              image="/images/app-development.jpg"
+              image="/images/services_app_development.jpg"
               icon={<Smartphone className="w-6 h-6" />}
               category="MOBILE DEVELOPMENT"
             />
@@ -83,7 +87,7 @@ export default function ServicesPage() {
             <ServiceCard
               title="IoT Integration"
               description="Connect devices and smart hardware for automated telemetry, industrial IoT monitoring, and secure device-to-cloud communication."
-              image="/images/iot.jpg"
+              image="/images/services_iot_integration.jpg"
               icon={<Network className="w-6 h-6" />}
               category="SMART DEVICES & IOT"
             />
@@ -91,7 +95,7 @@ export default function ServicesPage() {
             <ServiceCard
               title="AI Integration"
               description="Innovate workflows with custom artificial intelligence models, computer vision algorithms, NLP chatbots, and predictive analytics."
-              image="/images/ai integration.jpg"
+              image="/images/services_ai_integration.jpg"
               icon={<Cpu className="w-6 h-6" />}
               category="ARTIFICIAL INTELLIGENCE"
             />
@@ -99,7 +103,7 @@ export default function ServicesPage() {
             <ServiceCard
               title="Analytics & BI Dashboards"
               description="Data insights through custom dashboards, real-time reporting metrics, ETL pipelines, and executive business intelligence visualizers."
-              image="/images/data-analytics.jpg"
+              image="/images/services_data_analytics.jpg"
               icon={<BarChart3 className="w-6 h-6" />}
               category="DATA SCIENCE"
             />
@@ -107,7 +111,7 @@ export default function ServicesPage() {
             <ServiceCard
               title="Technology Mentorship Program"
               description="Our mentorship program connects ambitious students with industry professionals, offering career guidance, code reviews, and hands-on project exposure."
-              image="/images/Mentorship.jpg"
+              image="/images/svc_mentorship_v2.jpg"
               icon={<GraduationCap className="w-6 h-6" />}
               category="ACADEMIC MENTORSHIP"
             />
@@ -115,9 +119,25 @@ export default function ServicesPage() {
             <ServiceCard
               title="Guest Lectures & Industry Workshops"
               description="Our senior engineers deliver guest lectures and hands-on tech workshops at top universities, sharing real-world insights and inspiring future innovators."
-              image="/images/aqi.jpg"
+              image="/images/svc_workshop_v2.jpg"
               icon={<Presentation className="w-6 h-6" />}
               category="KNOWLEDGE SHARING"
+            />
+
+            <ServiceCard
+              title="Technical Training"
+              description="Hands-on enterprise skill enhancement in full-stack web architectures, Python, AI/ML pipelines, cloud administration, and industrial toolchains."
+              image="/images/svc_technical_training_v2.jpg"
+              icon={<Terminal className="w-6 h-6" />}
+              category="TECH CERTIFICATION"
+            />
+
+            <ServiceCard
+              title="Robotics Training"
+              description="Practical engineering workshops covering microcontroller integration, robotic kinematics, sensor telemetry, autonomous mobility, and embedded systems."
+              image="/images/svc_robotics_training_v2.jpg"
+              icon={<Bot className="w-6 h-6" />}
+              category="ROBOTICS & HARDWARE"
             />
           </div>
         </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, Sparkles, ArrowRight } from "lucide-react";
+import { Check, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
@@ -31,7 +31,7 @@ export default function PricingCard({
       transition={{ duration: 0.4 }}
       className={`relative flex flex-col justify-between p-8 rounded-2xl border transition-all duration-350 group overflow-hidden ${
         isPopular
-          ? "bg-[#0D0D0D] border-[#FFD700] shadow-[0_0_40px_rgba(255,215,0,0.2),0_0_80px_rgba(255,215,0,0.06)] scale-[1.02]"
+          ? "bg-[#0D0D0D] border-[#FFD700] shadow-[0_0_40px_rgba(255,215,0,0.2),0_0_80px_rgba(255,215,0,0.06)] md:-translate-y-1"
           : "bg-[#111111] border-[#222222] hover:border-[rgba(255,215,0,0.45)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_25px_rgba(255,215,0,0.12)] hover:-translate-y-2"
       }`}
     >
@@ -46,23 +46,18 @@ export default function PricingCard({
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(255,215,0,0.3)] to-transparent" />
       </div>
 
-      {/* Popular badge */}
-      {isPopular && (
-        <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 flex items-center gap-1.5 text-[9px] uppercase font-bold tracking-[0.2em] text-black px-4 py-1.5 rounded-full bg-gradient-to-r from-[#FFF000] via-[#FFD700] to-[#F5A623] shadow-[0_0_20px_rgba(255,215,0,0.5)]">
-          <Sparkles className="w-2.5 h-2.5" /> Best Choice
-        </div>
-      )}
-
-      <div className="space-y-6">
+      <div className="space-y-6 relative z-10">
         {/* Category */}
-        <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-[#FFD700]">
-          {category}
-        </span>
+        <div>
+          <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-[#FFD700]">
+            {category}
+          </span>
+        </div>
 
         {/* Title & subtitle */}
         <div>
           <h3 className="font-serif text-2xl font-light text-white">{title}</h3>
-          {subtitle && <p className="text-xs text-[#666] mt-1 leading-relaxed">{subtitle}</p>}
+          {subtitle && <p className="text-xs text-[#888888] mt-1 leading-relaxed font-light">{subtitle}</p>}
         </div>
 
         {/* Price */}
@@ -84,7 +79,7 @@ export default function PricingCard({
       </div>
 
       {/* CTA */}
-      <div className="mt-8">
+      <div className="mt-8 relative z-10">
         <Link
           href="/contact"
           className={`w-full flex items-center justify-center gap-2 py-3 px-6 rounded-lg text-[10px] font-bold uppercase tracking-[0.2em] transition-all duration-300 ${

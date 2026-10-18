@@ -22,7 +22,9 @@ export default function Accordion({ question, answer, defaultOpen = false }: Acc
       }`}
     >
       <button
+        type="button"
         onClick={() => setIsOpen(!isOpen)}
+        aria-expanded={isOpen}
         className="w-full flex items-center justify-between px-6 py-5 text-left group"
       >
         <span

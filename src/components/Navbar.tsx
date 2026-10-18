@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Menu, Sparkles, Zap, ChevronDown } from "lucide-react";
+import { X, Menu, Sparkles, ChevronDown } from "lucide-react";
 
 interface NavLinkItem {
   label: string;
@@ -72,12 +72,9 @@ export default function Navbar() {
         {/* ── Brand Logo ── */}
         <Link
           href="/"
-          className="pointer-events-auto group flex items-center gap-2.5 focus:outline-none"
+          className="pointer-events-auto group flex items-center focus:outline-none"
         >
-          <div className="relative w-9 h-9 flex items-center justify-center rounded-full bg-[#0a0a0c] border border-[rgba(255,215,0,0.35)] transition-all duration-300 group-hover:border-[#FFD700] group-hover:shadow-[0_0_16px_rgba(255,215,0,0.45)]">
-            <Zap className="w-4.5 h-4.5 text-[#FFD700]" fill="#FFD700" />
-          </div>
-          <span className="font-serif text-lg font-normal text-white tracking-wide transition-all duration-300 group-hover:text-[#FFD700]">
+          <span className="font-serif text-xl sm:text-2xl font-normal text-white tracking-wide transition-all duration-300 group-hover:text-[#FFD700]">
             Inno<span className="text-[#FFD700] glow-sm">Storey</span>
           </span>
         </Link>
@@ -229,10 +226,10 @@ export default function Navbar() {
 
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden w-10 h-10 flex items-center justify-center rounded-full bg-[#0d0d10]/90 border border-[rgba(255,215,0,0.3)] text-[#FFD700] hover:border-[#FFD700] hover:shadow-[0_0_14px_rgba(255,215,0,0.3)] transition-all duration-300"
+            className="lg:hidden w-11 h-11 flex items-center justify-center rounded-full bg-[#0d0d10]/90 border border-[rgba(255,215,0,0.3)] text-[#FFD700] hover:border-[#FFD700] hover:shadow-[0_0_14px_rgba(255,215,0,0.3)] transition-all duration-300 touch-manipulation"
             aria-label="Toggle menu"
           >
-            {mobileMenuOpen ? <X className="w-4.5 h-4.5" /> : <Menu className="w-4.5 h-4.5" />}
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
@@ -245,7 +242,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.98 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
-            className="lg:hidden mt-3 max-w-md mx-auto pointer-events-auto rounded-3xl bg-[#0c0c0e]/95 border border-[rgba(255,215,0,0.25)] shadow-[0_20px_50px_rgba(0,0,0,0.95),0_0_25px_rgba(255,215,0,0.15)] backdrop-blur-2xl p-5 overflow-hidden"
+            className="lg:hidden mt-3 w-full max-w-md mx-auto pointer-events-auto rounded-3xl bg-[#0c0c0e]/95 border border-[rgba(255,215,0,0.25)] shadow-[0_20px_50px_rgba(0,0,0,0.95),0_0_25px_rgba(255,215,0,0.15)] backdrop-blur-2xl p-5 overflow-hidden"
           >
             <div className="space-y-1 max-h-[75vh] overflow-y-auto pr-1">
               <div className="section-label mb-4">Navigation</div>

@@ -1,18 +1,23 @@
+"use client";
+
 import SectionHeader from "@/components/SectionHeader";
 import { ShieldCheck, Lock, FileText, CheckCircle } from "lucide-react";
+import PageHeroBackground from "@/components/PageHeroBackground";
 
 export default function TermsPage() {
   return (
     <div className="bg-[#000000] text-[#F5F5F5] min-h-screen">
       
       {/* Page Header */}
-      <section className="py-20 md:py-28 bg-gradient-to-b from-[#080808] to-[#050505] border-b border-[#FFD700]/15 text-center relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 md:py-28 bg-gradient-to-b from-[#080808] to-[#050505] border-b border-[#FFD700]/15 text-center relative overflow-hidden">
+        {/* Animated Gold Background Paths */}
+        <PageHeroBackground variant="terms" className="absolute inset-0 w-full h-full pointer-events-none z-0" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <span className="text-xs uppercase tracking-[0.25em] font-semibold text-[#FFD700] px-4 py-1.5 rounded-full bg-[#FFD700]/10 border border-[#FFD700]/30 mb-6 inline-block">
             LEGAL & GOVERNANCE
           </span>
           <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl font-light text-[#F5F5F5] leading-tight mb-6">
-            Terms of Service & <br />
+            Terms of Service & <br className="hidden sm:inline" />
             <span className="gold-gradient-text italic font-normal">Privacy Policy</span>
           </h1>
           <p className="text-base sm:text-lg text-[#999999] max-w-3xl mx-auto font-light leading-relaxed">
@@ -89,7 +94,7 @@ export default function TermsPage() {
 
               <div>
                 <h3 className="text-base text-[#F5F5F5] font-serif font-normal mb-2">5. Your Data Rights</h3>
-                <p>You reserve the right to request access to, correction of, or deletion of your personal data stored by us. For any privacy requests, please email us directly at <a href="mailto:info@innostorey.com" className="text-[#FFD700] underline">info@innostorey.com</a>.</p>
+                <p>You reserve the right to request access to, correction of, or deletion of your personal data stored by us. For any privacy requests, please email us directly at <a href="mailto:info@innostorey.in" className="text-[#FFD700] underline">info@innostorey.in</a> or <a href="mailto:innostoreyinnovations@gmail.com" className="text-[#FFD700] underline">innostoreyinnovations@gmail.com</a>.</p>
               </div>
             </div>
           </div>

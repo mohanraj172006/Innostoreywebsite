@@ -13,6 +13,7 @@ interface ServiceCardProps {
   icon?: ReactNode;
   category?: string;
   link?: string;
+  showLearnMore?: boolean;
 }
 
 export default function ServiceCard({
@@ -22,6 +23,7 @@ export default function ServiceCard({
   icon,
   category = "SERVICE",
   link = "/services",
+  showLearnMore = false,
 }: ServiceCardProps) {
   return (
     <motion.div
@@ -37,6 +39,7 @@ export default function ServiceCard({
           src={image}
           alt={title}
           fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
         />
         {/* Gradient overlay */}
@@ -71,15 +74,17 @@ export default function ServiceCard({
         </p>
 
         {/* CTA */}
-        <Link
-          href={link}
-          className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-[#FFD700] group/link"
-        >
-          <span className="relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-[#FFD700] after:shadow-[0_0_6px_rgba(255,215,0,0.5)] group-hover/link:after:w-full after:transition-all after:duration-300">
-            Learn More
-          </span>
-          <ArrowRight className="w-3 h-3 transition-transform duration-300 group-hover/link:translate-x-1" />
-        </Link>
+        {showLearnMore && (
+          <Link
+            href={link}
+            className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-[#FFD700] group/link"
+          >
+            <span className="relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-[#FFD700] after:shadow-[0_0_6px_rgba(255,215,0,0.5)] group-hover/link:after:w-full after:transition-all after:duration-300">
+              Learn More
+            </span>
+            <ArrowRight className="w-3 h-3 transition-transform duration-300 group-hover/link:translate-x-1" />
+          </Link>
+        )}
       </div>
 
       {/* Bottom neon line on hover */}

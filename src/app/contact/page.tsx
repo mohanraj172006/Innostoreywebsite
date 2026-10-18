@@ -5,13 +5,45 @@ import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Globe, Send, Sparkles, CheckCircle2, Clock } from "lucide-react";
 import { LinkedinIcon, InstagramIcon, YoutubeIcon, FacebookIcon } from "@/components/SocialIcons";
 import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
-import BackgroundPaths from "@/components/BackgroundPaths";
+import PageHeroBackground from "@/components/PageHeroBackground";
 
-const contactInfo = [
-  { icon: MapPin, label: "Corporate Address", value: "1/183 Muthalamman Kovil Street, Valayankulam, Madurai-625022, Tamil Nadu, India.", href: null },
-  { icon: Mail, label: "Email Inquiry", value: "info@innostorey.com", href: "mailto:info@innostorey.com" },
-  { icon: Phone, label: "Phone Lines", value: "+91 63831 09121\n+91 99428 61526", href: "tel:+916383109121" },
-  { icon: Globe, label: "Official Website", value: "www.innostorey.com", href: "https://www.innostorey.com" },
+interface ContactDetail {
+  icon: React.ComponentType<{ className?: string }>;
+  label: string;
+  items: { text: string; href: string | null }[];
+}
+
+const contactInfo: ContactDetail[] = [
+  {
+    icon: MapPin,
+    label: "Corporate Address",
+    items: [
+      { text: "1/183 Muthalamman Kovil Street, Valayankulam, Madurai-625022, Tamil Nadu, India.", href: null },
+    ],
+  },
+  {
+    icon: Mail,
+    label: "Email Inquiries",
+    items: [
+      { text: "info@innostorey.in", href: "mailto:info@innostorey.in" },
+      { text: "innostoreyinnovations@gmail.com", href: "mailto:innostoreyinnovations@gmail.com" },
+    ],
+  },
+  {
+    icon: Phone,
+    label: "Phone Lines",
+    items: [
+      { text: "+91 63831 09121", href: "tel:+916383109121" },
+      { text: "+91 93843 38182", href: "tel:+919384338182" },
+    ],
+  },
+  {
+    icon: Globe,
+    label: "Official Website",
+    items: [
+      { text: "www.innostorey.in", href: "https://www.innostorey.in" },
+    ],
+  },
 ];
 
 const socialLinks = [
@@ -32,23 +64,72 @@ export default function ContactPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formState.name || !formState.email || !formState.message) {
-      setFeedback({ type: "error", text: "Please fill in all required fields." });
+    if (isSubmitting) return;
+
+    const trimmedName = formState.name.trim();
+    const trimmedEmail = formState.email.trim();
+    const trimmedMessage = formState.message.trim();
+
+    // Client-side validation
+    if (!trimmedName) {
+      setFeedback({ type: "error", text: "Please enter your name." });
       return;
     }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!trimmedEmail || !emailRegex.test(trimmedEmail)) {
+      setFeedback({ type: "error", text: "Please enter a valid email address." });
+      return;
+    }
+
+    if (!trimmedMessage) {
+      setFeedback({ type: "error", text: "Please enter your message." });
+      return;
+    }
+
     setIsSubmitting(true);
     setFeedback(null);
+
     try {
-      await fetch("https://script.google.com/macros/s/AKfycbxp3-veR8Fa8MK-pnA5WXuwXb-QHNkZVNRskYShEvt8Na2_aVFC4hSqOKrDEgbnSdjr/exec", {
-        method: "POST", mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formState),
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: trimmedName,
+          email: trimmedEmail,
+          phone: formState.phone.trim(),
+          subject: formState.subject.trim(),
+          message: trimmedMessage,
+        }),
       });
-      setFeedback({ type: "success", text: "Message transmitted! Our engineering team will respond shortly." });
-      setFormState({ name: "", email: "", phone: "", subject: "", message: "" });
+
+      let data: { success?: boolean; message?: string } | null = null;
+      try {
+        data = await response.json();
+      } catch {
+        // Failed to parse JSON response
+      }
+
+      if (response.ok && data?.success) {
+        setFeedback({
+          type: "success",
+          text: "Thanks for reaching out! We will get back to you soon.",
+        });
+        setFormState({ name: "", email: "", phone: "", subject: "", message: "" });
+      } else {
+        setFeedback({
+          type: "error",
+          text: data?.message || "Something went wrong. Please try again later.",
+        });
+      }
     } catch (err) {
-      console.error(err);
-      setFeedback({ type: "error", text: "Something went wrong. Please email directly to info@innostorey.com." });
+      console.error("[Contact Form] Network or submission error:", err);
+      setFeedback({
+        type: "error",
+        text: "Network error. Please check your connection and try again.",
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -63,7 +144,7 @@ export default function ContactPage() {
       {/* ── Page Header ── */}
       <section className="py-24 md:py-32 bg-[#000] border-b border-[rgba(255,215,0,0.1)] text-center relative overflow-hidden">
         {/* Animated Gold Background Paths */}
-        <BackgroundPaths className="absolute inset-0 pointer-events-none z-0" />
+        <PageHeroBackground variant="contact" className="absolute inset-0 w-full h-full pointer-events-none z-0" />
         <div className="absolute inset-0 bg-grid opacity-25 pointer-events-none" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(255,215,0,0.08)_0%,transparent_60%)] pointer-events-none" />
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -115,27 +196,27 @@ export default function ContactPage() {
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
-                    <label className={labelClass}>Your Name *</label>
-                    <input type="text" name="name" value={formState.name} onChange={handleChange} required placeholder="e.g. Rajesh Kumar" className={inputClass} />
+                    <label htmlFor="contact-name" className={labelClass}>Your Name *</label>
+                    <input id="contact-name" type="text" name="name" value={formState.name} onChange={handleChange} required placeholder="e.g. Rajesh Kumar" className={inputClass} />
                   </div>
                   <div>
-                    <label className={labelClass}>Your Email *</label>
-                    <input type="email" name="email" value={formState.email} onChange={handleChange} required placeholder="e.g. rajesh@example.com" className={inputClass} />
+                    <label htmlFor="contact-email" className={labelClass}>Your Email *</label>
+                    <input id="contact-email" type="email" name="email" value={formState.email} onChange={handleChange} required placeholder="e.g. rajesh@example.com" className={inputClass} />
                   </div>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
-                    <label className={labelClass}>Phone Number</label>
-                    <input type="tel" name="phone" value={formState.phone} onChange={handleChange} placeholder="+91 63831 09121" className={inputClass} />
+                    <label htmlFor="contact-phone" className={labelClass}>Phone Number</label>
+                    <input id="contact-phone" type="tel" name="phone" value={formState.phone} onChange={handleChange} placeholder="+91 63831 09121" className={inputClass} />
                   </div>
                   <div>
-                    <label className={labelClass}>Inquiry Subject</label>
-                    <input type="text" name="subject" value={formState.subject} onChange={handleChange} placeholder="e.g. AI Cloud Integration" className={inputClass} />
+                    <label htmlFor="contact-subject" className={labelClass}>Inquiry Subject</label>
+                    <input id="contact-subject" type="text" name="subject" value={formState.subject} onChange={handleChange} placeholder="e.g. AI Cloud Integration" className={inputClass} />
                   </div>
                 </div>
                 <div>
-                  <label className={labelClass}>Your Message *</label>
-                  <textarea name="message" rows={5} value={formState.message} onChange={handleChange} required placeholder="Tell us about your technical requirements, project timeline, or questions..." className={`${inputClass} resize-none`} />
+                  <label htmlFor="contact-message" className={labelClass}>Your Message *</label>
+                  <textarea id="contact-message" name="message" rows={5} value={formState.message} onChange={handleChange} required placeholder="Tell us about your technical requirements, project timeline, or questions..." className={`${inputClass} resize-none`} />
                 </div>
 
                 <div className="flex flex-col sm:flex-row items-center gap-4 pt-2">
@@ -169,18 +250,30 @@ export default function ContactPage() {
                 </div>
 
                 <div className="space-y-5">
-                  {contactInfo.map(({ icon: Icon, label, value, href }) => (
+                  {contactInfo.map(({ icon: Icon, label, items }) => (
                     <div key={label} className="flex items-start gap-4">
                       <div className="w-10 h-10 rounded-xl bg-[rgba(255,215,0,0.06)] border border-[rgba(255,215,0,0.2)] flex items-center justify-center text-[#FFD700] shrink-0">
                         <Icon className="w-4.5 h-4.5" />
                       </div>
                       <div>
                         <strong className="block text-[10px] uppercase tracking-[0.2em] text-[#666] mb-1">{label}</strong>
-                        {href ? (
-                          <a href={href} className="text-xs text-[#A8A8A8] hover:text-[#FFD700] transition-colors duration-200 whitespace-pre-line">{value}</a>
-                        ) : (
-                          <span className="text-xs text-[#A8A8A8] leading-relaxed whitespace-pre-line">{value}</span>
-                        )}
+                        <div className="flex flex-col gap-0.5">
+                          {items.map((item, idx) =>
+                            item.href ? (
+                              <a
+                                key={idx}
+                                href={item.href}
+                                className="text-xs text-[#A8A8A8] hover:text-[#FFD700] transition-colors duration-200"
+                              >
+                                {item.text}
+                              </a>
+                            ) : (
+                              <span key={idx} className="text-xs text-[#A8A8A8] leading-relaxed">
+                                {item.text}
+                              </span>
+                            )
+                          )}
+                        </div>
                       </div>
                     </div>
                   ))}

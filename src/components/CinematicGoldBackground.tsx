@@ -272,12 +272,38 @@ export default function CinematicGoldBackground({
     resize();
     window.addEventListener("resize", resize);
 
-    // Visibility Observer to pause rendering when scrolled out of view
+    // Visibility Observer to completely pause rendering when scrolled out of view
     let isVisible = true;
+    let animationFrameId: number;
+    const startTime = performance.now();
+
+    const render = (time: number) => {
+      if (!isVisible) return;
+
+      // Smooth mouse lerping
+      mouseX += (targetMouseX - mouseX) * 0.05;
+      mouseY += (targetMouseY - mouseY) * 0.05;
+
+      const elapsedTime = (time - startTime) * 0.001;
+
+      gl.uniform2f(uResolution, canvas.width, canvas.height);
+      gl.uniform1f(uTime, elapsedTime);
+      gl.uniform2f(uMouse, mouseX, mouseY);
+
+      gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+      animationFrameId = requestAnimationFrame(render);
+    };
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
+          const wasVisible = isVisible;
           isVisible = entry.isIntersecting;
+          if (isVisible && !wasVisible) {
+            cancelAnimationFrame(animationFrameId);
+            animationFrameId = requestAnimationFrame(render);
+          }
         });
       },
       { threshold: 0.05 }
@@ -286,28 +312,6 @@ export default function CinematicGoldBackground({
     if (containerRef.current) {
       observer.observe(containerRef.current);
     }
-
-    // Animation Loop
-    let animationFrameId: number;
-    const startTime = performance.now();
-
-    const render = (time: number) => {
-      if (isVisible) {
-        // Smooth mouse lerping
-        mouseX += (targetMouseX - mouseX) * 0.05;
-        mouseY += (targetMouseY - mouseY) * 0.05;
-
-        const elapsedTime = (time - startTime) * 0.001;
-
-        gl.uniform2f(uResolution, canvas.width, canvas.height);
-        gl.uniform1f(uTime, elapsedTime);
-        gl.uniform2f(uMouse, mouseX, mouseY);
-
-        gl.drawArrays(gl.TRIANGLES, 0, 6);
-      }
-
-      animationFrameId = requestAnimationFrame(render);
-    };
 
     animationFrameId = requestAnimationFrame(render);
 

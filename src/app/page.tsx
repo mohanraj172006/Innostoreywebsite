@@ -8,12 +8,12 @@ import {
   Smartphone, BarChart3, Network, Sparkles,
   CheckCircle2, Building2, Star, Zap, Users, Award, Globe2,
 } from "lucide-react";
-import ParticleBackground from "@/components/ParticleBackground";
 import SectionHeader from "@/components/SectionHeader";
 import ServiceCard from "@/components/ServiceCard";
 import ProjectCard from "@/components/ProjectCard";
 import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
 import CinematicGoldBackground from "@/components/CinematicGoldBackground";
+import NeuralCircuitBackground from "@/components/NeuralCircuitBackground";
 
 const testimonials = [
   {
@@ -60,8 +60,8 @@ const whyChooseUs = [
 ];
 
 const stats = [
-  { value: "50+", label: "Projects Delivered", icon: <Zap className="w-5 h-5 text-[#FFD700]" /> },
-  { value: "100+", label: "Students Mentored", icon: <Users className="w-5 h-5 text-[#FFD700]" /> },
+  { value: "80+", label: "Projects Delivered", icon: <Zap className="w-5 h-5 text-[#FFD700]" /> },
+  { value: "480+", label: "Students Mentored", icon: <Users className="w-5 h-5 text-[#FFD700]" /> },
   { value: "15+", label: "Technologies Mastered", icon: <Globe2 className="w-5 h-5 text-[#FFD700]" /> },
   { value: "98%", label: "Client Satisfaction", icon: <Star className="w-5 h-5 text-[#FFD700]" /> },
 ];
@@ -111,9 +111,9 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.75, delay: 0.1 }}
-            className="hero-title text-5xl sm:text-7xl md:text-8xl lg:text-9xl mb-8 text-white"
+            className="hero-title text-4xl sm:text-7xl md:text-8xl lg:text-9xl mb-8 text-white"
           >
-            Empowering<br />
+            Empowering <br className="hidden sm:inline" />
             <span className="gold-gradient-text italic font-light">
               Innovation
             </span>
@@ -140,11 +140,8 @@ export default function HomePage() {
               label="Explore Our Services"
               href="/services"
             />
-            <Link href="/contact" className="btn-neon text-xs py-3.5 px-8 rounded-full">
-              Request a Consultation
-            </Link>
             <LiquidMetalButton
-              viewMode="icon"
+              label="Request a Consultation"
               href="/contact"
             />
           </motion.div>
@@ -182,7 +179,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
 
-            {/* Image */}
+            {/* Image - InnoStorey Logo with Neural Circuit Background */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -190,19 +187,45 @@ export default function HomePage() {
               transition={{ duration: 0.65, ease: "easeOut" }}
               className="lg:col-span-5 relative"
             >
-              <div className="relative w-full h-[420px] md:h-[500px] rounded-2xl overflow-hidden border border-[rgba(255,215,0,0.25)] shadow-[0_0_50px_rgba(255,215,0,0.08)]">
-                <Image src="/images/MC-1.jpg" alt="InnoStorey Innovations" fill className="object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent opacity-60" />
-                <div className="absolute inset-0 bg-gradient-to-tr from-[rgba(255,215,0,0.04)] to-transparent" />
-              </div>
-              {/* Floating badge */}
-              <div className="absolute -bottom-5 -right-5 glass-neon p-5 rounded-xl hidden sm:flex items-center gap-4 border border-[rgba(255,215,0,0.3)]">
-                <Building2 className="w-9 h-9 text-[#FFD700]" />
-                <div>
-                  <span className="block font-serif text-xl text-white">Pvt Ltd</span>
-                  <span className="text-[9px] uppercase tracking-widest text-[#666]">Incorporated Innovation</span>
+              {/* Outer glow ring */}
+              <div className="absolute -inset-2 rounded-3xl bg-[radial-gradient(ellipse,rgba(255,215,0,0.18)_0%,transparent_70%)] blur-xl pointer-events-none z-0" />
+
+              <div className="relative w-full h-[420px] md:h-[500px] rounded-2xl overflow-hidden border border-[rgba(255,215,0,0.35)] shadow-[0_0_60px_rgba(255,215,0,0.15)] z-10">
+                {/* Animated Neural Circuit Background */}
+                <div className="absolute inset-0 bg-[#050505]">
+                  <NeuralCircuitBackground className="absolute inset-0 w-full h-full" />
                 </div>
+
+                {/* Corner bracket decorations */}
+                <div className="absolute top-3 left-3 w-6 h-6 border-t-2 border-l-2 border-[rgba(255,215,0,0.7)] z-20" />
+                <div className="absolute top-3 right-3 w-6 h-6 border-t-2 border-r-2 border-[rgba(255,215,0,0.7)] z-20" />
+                <div className="absolute bottom-3 left-3 w-6 h-6 border-b-2 border-l-2 border-[rgba(255,215,0,0.7)] z-20" />
+                <div className="absolute bottom-3 right-3 w-6 h-6 border-b-2 border-r-2 border-[rgba(255,215,0,0.7)] z-20" />
+
+                {/* Logo centered */}
+                <div className="absolute inset-0 flex items-center justify-center z-20 p-8">
+                  <div className="relative w-full max-w-[320px]">
+                    {/* Logo glow halo */}
+                    <div className="absolute inset-0 bg-[radial-gradient(ellipse,rgba(255,215,0,0.12)_0%,transparent_70%)] blur-2xl rounded-full scale-150" />
+                    <Image
+                      src="/images/IS PNG 1.png"
+                      alt="InnoStorey Innovations Pvt Ltd"
+                      width={320}
+                      height={280}
+                      className="relative z-10 w-full h-auto object-contain drop-shadow-[0_0_28px_rgba(255,215,0,0.5)]"
+                      style={{ width: "100%", height: "auto" }}
+                      priority
+                    />
+                  </div>
+                </div>
+
+                {/* Bottom gradient fade */}
+                <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#0A0A0A] to-transparent z-20" />
+
+                {/* Subtle gold vignette edges */}
+                <div className="absolute inset-0 shadow-[inset_0_0_40px_rgba(0,0,0,0.7)] z-20 pointer-events-none" />
               </div>
+
             </motion.div>
 
             {/* Text */}
@@ -253,12 +276,12 @@ export default function HomePage() {
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
-            <ServiceCard title="AI & Custom Software Development" description="Advanced AI-powered software solutions including NLP, computer vision, and predictive modeling tailored to industry needs." image="/images/ai integration.jpg" icon={<Cpu className="w-5 h-5" />} category="ARTIFICIAL INTELLIGENCE" />
-            <ServiceCard title="IoT & Smart Automation" description="Interconnected IoT ecosystems for smart home and industrial automation, real-time device monitoring, and edge telemetry." image="/images/iot2.png" icon={<Network className="w-5 h-5" />} category="SMART DEVICES" />
-            <ServiceCard title="Cloud Computing & Cybersecurity" description="Scalable cloud migration, multi-cloud governance, DevOps automated pipelines, and multi-layered cyber defense strategies." image="/images/cloud security.jpg" icon={<Cloud className="w-5 h-5" />} category="CLOUD & SECURITY" />
-            <ServiceCard title="Web Development Services" description="Creating responsive, secure, and ultra-fast corporate websites tailored for exceptional user experience and business growth." image="/images/Web-development.jpg" icon={<Code2 className="w-5 h-5" />} category="WEB ENGINEERING" />
-            <ServiceCard title="Mobile App Development" description="Designing and building native iOS/Android and cross-platform Flutter/React Native mobile applications for on-the-go connectivity." image="/images/app-development.jpg" icon={<Smartphone className="w-5 h-5" />} category="MOBILE APPS" />
-            <ServiceCard title="Data Analytics & BI Tools" description="Extracting actionable business intelligence, interactive executive dashboards, and ML-driven predictive analytics." image="/images/data ana.jpg" icon={<BarChart3 className="w-5 h-5" />} category="DATA SCIENCE" />
+            <ServiceCard title="AI & Custom Software Development" description="Advanced AI-powered software solutions including NLP, computer vision, and predictive modeling tailored to industry needs." image="/images/home_ai_development.jpg" icon={<Cpu className="w-5 h-5" />} category="ARTIFICIAL INTELLIGENCE" showLearnMore />
+            <ServiceCard title="IoT & Smart Automation" description="Interconnected IoT ecosystems for smart home and industrial automation, real-time device monitoring, and edge telemetry." image="/images/home_iot_automation.jpg" icon={<Network className="w-5 h-5" />} category="SMART DEVICES" showLearnMore />
+            <ServiceCard title="Cloud Computing & Cybersecurity" description="Scalable cloud migration, multi-cloud governance, DevOps automated pipelines, and multi-layered cyber defense strategies." image="/images/home_cloud_security.jpg" icon={<Cloud className="w-5 h-5" />} category="CLOUD & SECURITY" showLearnMore />
+            <ServiceCard title="Web Development Services" description="Creating responsive, secure, and ultra-fast corporate websites tailored for exceptional user experience and business growth." image="/images/home_web_development.jpg" icon={<Code2 className="w-5 h-5" />} category="WEB ENGINEERING" showLearnMore />
+            <ServiceCard title="Mobile App Development" description="Designing and building native iOS/Android and cross-platform Flutter/React Native mobile applications for on-the-go connectivity." image="/images/home_mobile_development.jpg" icon={<Smartphone className="w-5 h-5" />} category="MOBILE APPS" showLearnMore />
+            <ServiceCard title="Data Analytics & BI Tools" description="Extracting actionable business intelligence, interactive executive dashboards, and ML-driven predictive analytics." image="/images/home_data_analytics.jpg" icon={<BarChart3 className="w-5 h-5" />} category="DATA SCIENCE" showLearnMore />
           </div>
 
           <div className="mt-16 text-center">
@@ -281,10 +304,10 @@ export default function HomePage() {
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
-            <ProjectCard title="AI Healthcare Platform" description="A revolutionary AI-powered diagnostic platform integrating patient clinical data, medical imaging analysis, and real-time clinical decision support." image="/images/SMART HEALTH.jpg" category="HEALTHCARE AI" technologies={["AI/ML", "Python", "Computer Vision", "Cloud API"]} outcomes="Improved diagnostic precision and streamlined hospital workflows." />
-            <ProjectCard title="Smart City Automation" description="Urban IoT automation including intelligent traffic flow optimization, energy-efficient smart street lights, and municipal environmental sensors." image="/images/SMART CITY1.jpg" category="SMART CITY IOT" technologies={["IoT Sensors", "MQTT", "Edge Computing", "Dashboard"]} outcomes="Reduced municipal carbon footprint and enhanced public safety." />
-            <ProjectCard title="Responsive Corporate Website" description="A high-performance corporate portal built with modern web architecture, responsive visual design, animation systems, and SEO optimization." image="/images/RES BUSINESS.jpg" category="WEB ARCHITECTURE" technologies={["React", "Next.js", "Tailwind CSS", "Framer Motion"]} outcomes="Increased organic search reach and client inquiry conversion." />
-            <ProjectCard title="Custom E-Commerce Platform" description="Full-featured e-commerce ecosystem with real-time inventory management, secure multi-gateway checkout, and customer analytics." image="/images/ECOMMERCE.jpg" category="E-COMMERCE" technologies={["Node.js", "MySQL", "Payment API", "React"]} outcomes="Scalable transaction processing with zero checkout friction." />
+            <ProjectCard title="AI Healthcare Platform" description="A revolutionary AI-powered diagnostic platform integrating patient clinical data, medical imaging analysis, and real-time clinical decision support." image="/images/home_smart_health.jpg" category="HEALTHCARE AI" technologies={["AI/ML", "Python", "Computer Vision", "Cloud API"]} outcomes="Improved diagnostic precision and streamlined hospital workflows." />
+            <ProjectCard title="Smart City Automation" description="Urban IoT automation including intelligent traffic flow optimization, energy-efficient smart street lights, and municipal environmental sensors." image="/images/home_smart_city.jpg" category="SMART CITY IOT" technologies={["IoT Sensors", "MQTT", "Edge Computing", "Dashboard"]} outcomes="Reduced municipal carbon footprint and enhanced public safety." />
+            <ProjectCard title="Responsive Corporate Website" description="A high-performance corporate portal built with modern web architecture, responsive visual design, animation systems, and SEO optimization." image="/images/home_corporate_web.jpg" category="WEB ARCHITECTURE" technologies={["React", "Next.js", "Tailwind CSS", "Framer Motion"]} outcomes="Increased organic search reach and client inquiry conversion." />
+            <ProjectCard title="Custom E-Commerce Platform" description="Full-featured e-commerce ecosystem with real-time inventory management, secure multi-gateway checkout, and customer analytics." image="/images/home_ecommerce.jpg" category="E-COMMERCE" technologies={["Node.js", "MySQL", "Payment API", "React"]} outcomes="Scalable transaction processing with zero checkout friction." />
           </div>
 
           <div className="mt-14 text-center">
@@ -402,8 +425,8 @@ export default function HomePage() {
               </span>
             </div>
 
-            <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl font-light text-white leading-tight">
-              Ready to Build<br />
+            <h2 className="font-serif text-3xl sm:text-5xl md:text-6xl font-light text-white leading-tight">
+              Ready to Build <br className="hidden sm:inline" />
               <span className="gold-gradient-text italic">Tomorrow&apos;s Solutions?</span>
             </h2>
 
@@ -417,9 +440,10 @@ export default function HomePage() {
                 label="Get in Touch"
                 href="/contact"
               />
-              <Link href="/sales" className="btn-neon py-3.5 px-9 rounded-full text-xs">
-                View Service Packages
-              </Link>
+              <LiquidMetalButton
+                label="View Service Packages"
+                href="/sales"
+              />
             </div>
           </motion.div>
         </div>
